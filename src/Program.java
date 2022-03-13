@@ -4,6 +4,8 @@ import java.util.Date;
 
 public class Program {
     public static void main(String[] args) {
+//https://dirask.com/posts/WSEI-2021-2022-lato-labN-2-PROGN-Programowanie-aplikacji-back-endowych-lab-1-jQk38D
+
        // 1
         try(FileInputStream fs = new FileInputStream("D:\\Users\\patryk.baranek\\Desktop\\test.txt")){
             System.out.println(fs.read());
