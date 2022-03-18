@@ -8,24 +8,24 @@ public class Main {
     public static void main(String[] args) {
         //https://dirask.com/posts/WSEI-2021-2022-lato-labN-2-PROGN-Programowanie-aplikacji-back-endowych-lab-1-jQk38D
 
-       // 1
-        readFile("E:\\test\\text.txt");
+        // 1
+        readFile("D:\\test\\text2.txt");
 
-        //2
-        writeFile("E:\\test\\text2.txt");
+        // 2
+        //writeFile("D:\\test\\text2.txt");
 
-
-
-        //3
+        // 3
         int[] array = new int[]{4, 5, 7, 11, 12, 15, 15, 21, 40, 45 };
         int index = searchIndex(array, 7);
         System.out.println(index);
 
 
-        //5
+        // 5
         Date date = new Date();
         System.out.println(date);
 
+        // 6
+        
 
 
 
@@ -36,12 +36,10 @@ public class Main {
     }
 
     public static  void readFile(String filePath){
-        try(FileInputStream fis = new FileInputStream(new File(filePath))) {
-            int content;
-
-            while ((content = fis.read() )!= -1){
-                System.out.print((char) content);
-            }
+        var file = new File(filePath);
+        try(FileInputStream fis = new FileInputStream(file)) {
+            Scanner scanner = new Scanner(fis);
+            System.out.println(scanner.nextLine());
 
         }catch(IOException e){
             e.printStackTrace();
@@ -50,14 +48,16 @@ public class Main {
     }
 
     public static void writeFile(String filePath){
-        try (FileOutputStream fos = new FileOutputStream(new File(filePath))){
+        var file = new File(filePath);
+        try (FileOutputStream fos = new FileOutputStream(file)){
+            PrintWriter pw = new PrintWriter(fos);
             Scanner scanner = new Scanner(System.in);
             String userInput = scanner.nextLine();
 
+            pw.write(userInput);
+            pw.close();
 
-
-        }
-        catch (IOException e){
+        }catch (IOException e){
             e.printStackTrace();
         }
 
