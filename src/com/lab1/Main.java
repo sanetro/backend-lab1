@@ -1,22 +1,18 @@
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.util.Date;
+package com.lab1;
 
-public class Program {
+import java.io.*;
+import java.util.Date;
+import java.util.Scanner;
+
+public class Main {
     public static void main(String[] args) {
-//https://dirask.com/posts/WSEI-2021-2022-lato-labN-2-PROGN-Programowanie-aplikacji-back-endowych-lab-1-jQk38D
+        //https://dirask.com/posts/WSEI-2021-2022-lato-labN-2-PROGN-Programowanie-aplikacji-back-endowych-lab-1-jQk38D
 
        // 1
-        try(FileInputStream fs = new FileInputStream("D:\\Users\\patryk.baranek\\Desktop\\test.txt")){
-            System.out.println(fs.read());
-        }catch (Exception e){
-            System.out.println(e);
-        }
+        readFile("E:\\test\\text.txt");
 
         //2
-        try(FileOutputStream fs = new FileOutputStream("D:\\Users\\patryk.baranek\\Desktop\\test.txt")){
-
-        }
+        writeFile("E:\\test\\text2.txt");
 
 
 
@@ -39,6 +35,33 @@ public class Program {
 
     }
 
+    public static  void readFile(String filePath){
+        try(FileInputStream fis = new FileInputStream(new File(filePath))) {
+            int content;
+
+            while ((content = fis.read() )!= -1){
+                System.out.print((char) content);
+            }
+
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void writeFile(String filePath){
+        try (FileOutputStream fos = new FileOutputStream(new File(filePath))){
+            Scanner scanner = new Scanner(System.in);
+            String userInput = scanner.nextLine();
+
+
+
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+
+    }
 
     public static int searchIndex(int[] array, int value) {
         int index = 0;
