@@ -11,10 +11,10 @@ public class Main {
         //https://dirask.com/posts/WSEI-2021-2022-lato-labN-2-PROGN-Programowanie-aplikacji-back-endowych-lab-1-jQk38D
 
         // 1
-        readFile("D:\\test\\text2.txt");
+        readFile("text.txt");
 
         // 2
-        //writeFile("D:\\test\\text2.txt");
+//        writeFile("text2.txt");
 
         // 3
         int[] array = new int[]{4, 5, 7, 11, 12, 15, 15, 21, 40, 45 };
@@ -28,12 +28,25 @@ public class Main {
 
         // 6
 
+        // 7
         ObjectMapper objectMapper = new ObjectMapper();
-        User userObject = new User("Patryk", "Baranek", new String[]{"console games", "computers", "football"});
+
+        User userObject = new User();
+        userObject.setName("Patryk");
+        userObject.setSurname("Baranek");
+        userObject.setAge(22);
         String userJson = objectMapper.writeValueAsString(userObject);
 
         System.out.println(userJson);
 
+        //8
+
+        String stringUserJson = "{\"name\":\"John\", \"surname\":\"Doe\", \"age\":\"24\"}";
+        User stringUserObject = objectMapper.readValue(stringUserJson, User.class);
+
+        System.out.println(stringUserObject.getName());
+        System.out.println(stringUserObject.getSurname());
+        System.out.println(stringUserObject.getAge());
 
 
 
@@ -45,11 +58,12 @@ public class Main {
 
     }
 
-    public static  void readFile(String filePath){
+    public static void readFile(String filePath){
         var file = new File(filePath);
         try(FileInputStream fis = new FileInputStream(file)) {
             Scanner scanner = new Scanner(fis);
-            System.out.println(scanner.nextLine());
+            scanner.nextLine();
+
 
         }catch(IOException e){
             e.printStackTrace();
@@ -77,13 +91,13 @@ public class Main {
         int index = 0;
         int limit = array.length - 1;
         while (index <= limit) {
-            int point = (int) Math.ceil((index + limit) / 2);
-            int entry = array[point];
+            double point = Math.ceil((index + limit) / 2);
+            int entry = array[(int) point];
             if (value > entry) {
-                limit = point + 1;
+                limit = (int)point + 1;
                 continue;
             }
-            return point;
+            return (int) point;
         }
         return -1;
     }

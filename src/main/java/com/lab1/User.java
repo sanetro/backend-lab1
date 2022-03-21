@@ -3,21 +3,20 @@ package com.lab1;
 public class User {
     private String name;
     private String surname;
-    private String[] hobby;
+    private int age;
 
-    public User(String name, String surname, String[] hobby){
-        this.name = name;
-        this.surname = surname;
-        this.hobby = hobby;
+    public User(){
+
     }
 
     public void setName(String name){
         this.name = name;
     }
 
-    public void setSurname(){
+    public void setSurname(String surname){
         this.surname = surname;
     }
+    public void setAge(int age){this.age = age;}
 
     public String getName(){
         return this.name;
@@ -25,5 +24,8 @@ public class User {
 
     public String getSurname(){
         return this.surname;
+    }
+    public int getAge(){
+        return this.age;
     }
 }
