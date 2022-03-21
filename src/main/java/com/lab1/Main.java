@@ -3,9 +3,11 @@ package com.lab1;
 import java.io.*;
 import java.util.Date;
 import java.util.Scanner;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws JsonProcessingException {
         //https://dirask.com/posts/WSEI-2021-2022-lato-labN-2-PROGN-Programowanie-aplikacji-back-endowych-lab-1-jQk38D
 
         // 1
@@ -25,7 +27,15 @@ public class Main {
         System.out.println(date);
 
         // 6
-        
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        User userObject = new User("Patryk", "Baranek", new String[]{"console games", "computers", "football"});
+        String userJson = objectMapper.writeValueAsString(userObject);
+
+        System.out.println(userJson);
+
+
+
 
 
 
