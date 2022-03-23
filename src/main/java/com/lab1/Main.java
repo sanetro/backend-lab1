@@ -1,8 +1,8 @@
 package com.lab1;
 
 import java.io.*;
-import java.util.Date;
-import java.util.Scanner;
+import java.util.*;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -14,7 +14,7 @@ public class Main {
         readFile("text.txt");
 
         // 2
-//        writeFile("text2.txt");
+        //writeFile("text2.txt");
 
         // 3
         int[] array = new int[]{4, 5, 7, 11, 12, 15, 15, 21, 40, 45 };
@@ -39,7 +39,7 @@ public class Main {
 
         System.out.println(userJson);
 
-        //8
+        // 8
 
         String stringUserJson = "{\"name\":\"John\", \"surname\":\"Doe\", \"age\":\"24\"}";
         User stringUserObject = objectMapper.readValue(stringUserJson, User.class);
@@ -47,6 +47,83 @@ public class Main {
         System.out.println(stringUserObject.getName());
         System.out.println(stringUserObject.getSurname());
         System.out.println(stringUserObject.getAge());
+
+
+        // 9
+
+        System.out.println("Array List");
+        ArrayList<String> arrayList = new ArrayList<String>();
+        arrayList.add("d");
+        arrayList.add("e");
+        arrayList.add("e");
+        arrayList.add("e");
+        arrayList.add("f");
+        arrayList.add("f");
+        arrayList.add("f");
+        arrayList.add("g");
+        arrayList.add("g");
+        arrayList.add("g");
+        arrayList.add("g");
+        arrayList.forEach(item -> System.out.println(item));
+
+
+        for(int i = 0; i < arrayList.size(); i += 2){
+            arrayList.remove(i);
+        }
+
+        System.out.println();
+        arrayList.forEach(item -> System.out.println(item));
+
+
+        System.out.println("Linked List");
+        LinkedList<String> linkedList = new LinkedList<String>();
+        linkedList.add("1");
+        linkedList.add("2");
+        linkedList.add("3");
+        linkedList.add("4");
+        linkedList.add("5");
+        linkedList.forEach(item -> System.out.println(item));
+
+        for(int i = 0; i < linkedList.size(); i += 2){
+            linkedList.remove(i);
+            System.out.println(linkedList.size());
+        }
+
+
+
+
+        System.out.println();
+        linkedList.forEach(item -> System.out.println(item));
+
+
+        // 10
+
+        System.out.println();
+
+        var namesArrayList = new ArrayList<String>();
+        namesArrayList.add("Patryk");
+        namesArrayList.add("Patryk");
+        namesArrayList.add("Patryk");
+        namesArrayList.add("Dominik");
+        namesArrayList.add("Dominik");
+        namesArrayList.add("Dominik");
+        namesArrayList.add("Bartek");
+        namesArrayList.add("Bartek");
+        namesArrayList.add("Bartek");
+        namesArrayList.add("Bartek");
+
+        Set<String> hashSet = new HashSet<String>();
+
+        for(var name : namesArrayList){
+            hashSet.add(name);
+        }
+
+        System.out.println("Names in hashSet");
+        for (var item : hashSet) {
+            System.out.println(item);
+        }
+
+
 
 
 
