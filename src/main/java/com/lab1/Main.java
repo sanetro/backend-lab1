@@ -1,8 +1,11 @@
 package com.lab1;
 
 import java.io.*;
-import java.util.Date;
-import java.util.Scanner;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.sql.Time;
+import java.util.*;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -23,17 +26,25 @@ public class Main {
 
 
         // 5
-        Date date = new Date();
-        System.out.println(date);
+        Date now = new Date();
+        TimeZone.setDefault(TimeZone.getTimeZone("Europe/Warsaw"));
+        System.out.println("Czas lokalny: ");
+        System.out.println(now);
+        TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
+        System.out.println("Czas globalny: ");
+        System.out.println(now);
 
         // 6
+
+        showAllLines("example.txt");
+
 
         // 7
         ObjectMapper objectMapper = new ObjectMapper();
 
         User userObject = new User();
-        userObject.setName("Patryk");
-        userObject.setSurname("Baranek");
+        userObject.setName("Bartek");
+        userObject.setSurname("Saleta");
         userObject.setAge(22);
         String userJson = objectMapper.writeValueAsString(userObject);
 
@@ -49,15 +60,93 @@ public class Main {
         System.out.println(stringUserObject.getAge());
 
 
+        // 9
+
+        System.out.println("Array List");
+        ArrayList<String> arrayList = new ArrayList<String>();
+        arrayList.add("one");
+        arrayList.add("two");
+        arrayList.add("three");
+        arrayList.add("four");
+        arrayList.add("five");
+        arrayList.add("six");
+        arrayList.add("seven");
+        arrayList.add("eight");
+        arrayList.add("nine");
+        arrayList.add("ten");
+        arrayList.forEach(item -> System.out.println(item));
+
+        int temp = 1;
+        for(int i = 0; i < arrayList.size(); i++){
+            if(i == 0){
+                temp = 1;
+            }
+
+            if(temp % 2 == 0){
+                arrayList.remove(i);
+            }
+            temp++;
+        }
+
+        System.out.println();
+        arrayList.forEach(item -> System.out.println(item));
 
 
+        System.out.println("Linked List");
+        LinkedList<String> linkedList = new LinkedList<String>();
+        linkedList.add("1");
+        linkedList.add("2");
+        linkedList.add("3");
+        linkedList.add("4");
+        linkedList.add("5");
+        linkedList.add("6");
+        linkedList.forEach(item -> System.out.println(item));
+
+        for(int i = 0; i < linkedList.size(); i++){
+            if(i == 0){
+                temp = 1;
+            }
+
+            if(temp % 2 == 0){
+                linkedList.remove(i);
+            }
+            temp++;
+        }
 
 
-       // System.out.println(Crc32("text"));
+        System.out.println();
+        linkedList.forEach(item -> System.out.println(item));
 
 
+        // 10
+
+        System.out.println();
+
+        var namesArrayList = new ArrayList<String>();
+        namesArrayList.add("Patryk");
+        namesArrayList.add("Patryk");
+        namesArrayList.add("Patryk");
+        namesArrayList.add("Dominik");
+        namesArrayList.add("Dominik");
+        namesArrayList.add("Dominik");
+        namesArrayList.add("Bartek");
+        namesArrayList.add("Bartek");
+        namesArrayList.add("Bartek");
+        namesArrayList.add("Bartek");
+
+        Set<String> hashSet = new HashSet<String>();
+
+        for(var name : namesArrayList){
+            hashSet.add(name);
+        }
+
+        System.out.println("Names in hashSet");
+        for (var item : hashSet) {
+            System.out.println(item);
+        }
     }
 
+    // 1
     public static void readFile(String filePath){
         var file = new File(filePath);
         try(FileInputStream fis = new FileInputStream(file)) {
@@ -71,6 +160,7 @@ public class Main {
 
     }
 
+    // 2
     public static void writeFile(String filePath){
         var file = new File(filePath);
         try (FileOutputStream fos = new FileOutputStream(file)){
@@ -87,17 +177,18 @@ public class Main {
 
     }
 
+    // 3
     public static int searchIndex(int[] array, int value) {
         int index = 0;
         int limit = array.length - 1;
         while (index <= limit) {
-            double point = Math.ceil((index + limit) / 2);
-            int entry = array[(int) point];
+            int point = (int)Math.ceil((index + limit) / 2);
+            int entry = array[point];
             if (value > entry) {
-                limit = (int)point + 1;
+                limit = point + 1;
                 continue;
             }
-            return (int) point;
+            return point;
         }
         return -1;
     }
@@ -122,4 +213,26 @@ public class Main {
 
 
     }*/
+
+    // 6
+    public static List<String> readAllLines(String fileName){
+        List<String> lines = Collections.emptyList();
+        try{
+            lines = Files.readAllLines(Paths.get(fileName));
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+        return lines;
+
+    }
+
+    public static void showAllLines(String filePath){
+        var lines = readAllLines(filePath);
+
+        for (int i = 0; i < lines.size(); i++){
+            int temp = i;
+            System.out.println(++temp + ". " + lines.get(i));
+        }
+    }
 }
