@@ -17,7 +17,7 @@ public class Main {
         readFile("text.txt");
 
         // 2
-//        writeFile("text2.txt");
+        writeFile("text2.txt");
 
         // 3
         int[] array = new int[]{4, 5, 7, 11, 12, 15, 15, 21, 40, 45 };
@@ -36,7 +36,7 @@ public class Main {
 
         // 6
 
-        showAllLines("example.txt");
+        showAllLinesInFile("example.txt");
 
 
         // 7
@@ -74,19 +74,9 @@ public class Main {
         arrayList.add("eight");
         arrayList.add("nine");
         arrayList.add("ten");
-        arrayList.forEach(item -> System.out.println(item));
+        arrayList.add("eleven");
 
-        int temp = 1;
-        for(int i = 0; i < arrayList.size(); i++){
-            if(i == 0){
-                temp = 1;
-            }
-
-            if(temp % 2 == 0){
-                arrayList.remove(i);
-            }
-            temp++;
-        }
+        showItemsInList(arrayList);
 
         System.out.println();
         arrayList.forEach(item -> System.out.println(item));
@@ -100,19 +90,11 @@ public class Main {
         linkedList.add("4");
         linkedList.add("5");
         linkedList.add("6");
-        linkedList.forEach(item -> System.out.println(item));
+        linkedList.add("7");
+        linkedList.add("8");
+        linkedList.add("9");
 
-        for(int i = 0; i < linkedList.size(); i++){
-            if(i == 0){
-                temp = 1;
-            }
-
-            if(temp % 2 == 0){
-                linkedList.remove(i);
-            }
-            temp++;
-        }
-
+        showItemsInList(linkedList);
 
         System.out.println();
         linkedList.forEach(item -> System.out.println(item));
@@ -193,29 +175,30 @@ public class Main {
         return -1;
     }
 
-   /* public static long int Crc32(String text) {
-        int[] CRC_TABLE = new int[256];
-
-        for (int i = 0; i < 256; ++i) {
-            int code = i;
-            for (int j = 0; j < 8; ++j) {
-                code = (code & 0x01 ? 0xEDB88320 ^ (code >>> 1) : (code >>> 1));
-            }
-            CRC_TABLE[i] = code;
-        }
-
-        int crc = -1;
-        for (int i = 0; i < text.length(); ++i) {
-            int code = (int) text.charAt(i);
-            crc = CRC_TABLE[(code ^ crc) & 0xFF] ^ (crc >>> 8);
-        }
-        return (-1 ^ crc) >>> 0;
-
-
-    }*/
+    // 4
+//    public static int Crc32(String text) {
+//        int[] CRC_TABLE = new int[256];
+//
+//        for (int i = 0; i < 256; ++i) {
+//            int code = i;
+//            for (int j = 0; j < 8; ++j) {
+//                code = (code & 0x01 ? 0xEDB88320 ^ (code >>> 1) : (code >>> 1));
+//            }
+//            CRC_TABLE[i] = code;
+//        }
+//
+//        int crc = -1;
+//        for (int i = 0; i < text.length(); ++i) {
+//            int code = (int) text.charAt(i);
+//            crc = CRC_TABLE[(code ^ crc) & 0xFF] ^ (crc >>> 8);
+//        }
+//        return (-1 ^ crc) >>> 0;
+//
+//
+//    }
 
     // 6
-    public static List<String> readAllLines(String fileName){
+    public static List<String> readAllLinesInFile(String fileName){
         List<String> lines = Collections.emptyList();
         try{
             lines = Files.readAllLines(Paths.get(fileName));
@@ -227,12 +210,28 @@ public class Main {
 
     }
 
-    public static void showAllLines(String filePath){
-        var lines = readAllLines(filePath);
+    public static void showAllLinesInFile(String filePath){
+        var lines = readAllLinesInFile(filePath);
 
         for (int i = 0; i < lines.size(); i++){
             int temp = i;
             System.out.println(++temp + ". " + lines.get(i));
+        }
+    }
+
+    // 9 10
+    public static void showItemsInList(List<String> list){
+        Iterator<String> newList = list.iterator();
+
+        int temp = 0;
+        while (newList.hasNext()){
+            if(temp % 2 == 0 && temp != 0){
+                newList.remove();
+            }
+
+            System.out.println(newList.next());
+
+            ++temp;
         }
     }
 }
